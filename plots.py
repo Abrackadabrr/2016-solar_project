@@ -4,13 +4,15 @@ import math
 import matplotlib.patches as mpatches
 
 
-def get_points(filename):
+def get_params(filename):
     """
     Считываю данные из файлика в массив и возвращю его
+    :param filename: имя файла в этой же директории
+    return: два листа - один с расстоянием, другой со скоростью
     """
     list_of_velocity = []
     list_of_distance = []
-
+    list_of_time = []
     list_of_strings = []
     list_of_data = []
 
@@ -25,8 +27,9 @@ def get_points(filename):
         if lists[0] == "Planet":
             list_of_distance.append(math.sqrt(float(lists[4])**2 + float(lists[5])**2))
             list_of_velocity.append(math.sqrt(float(lists[6])**2 + float(lists[7])**2))
+            list_of_time.append(float(lists[4]))
 
-    print (list_of_velocity, list_of_distance)
+    return list_of_time, (list_of_distance, list_of_velocity)
 
 
 def build_plot(tup_data, color, name):
@@ -34,17 +37,10 @@ def build_plot(tup_data, color, name):
     return mpatches.Patch(color=color, label=name)
 
 
+time, planet_params = get_params("test_file.txt")
+
+
 '''
-
-size_v, time_v = get_points('size_access_stl.txt', 'access_stl.txt', 1)
-#size_v_foreach, time_v_foreach = get_points('size_for_erase_my.txt', 'erase_my.txt', 1)
-
-size_fl, time_fl = get_points('size_for_walk_on_f_list.txt', 'walk_on_f_list.txt', 1)
-size_l, time_l = get_points('size_for_walk_on_list.txt', 'walk_on_list.txt', 1)
-size_set, time_set = get_points('size_for_walk_on_set.txt', 'walk_on_set.txt', 1)
-size_map, time_map = get_points('size_for_walk_on_map.txt', 'walk_on_map.txt', 1)
-
-
 fig = plt.figure()
 
 vector = build_plot((size_v, time_v), 'red', 'My vector')
@@ -65,4 +61,3 @@ plt.ylabel('Time of access')
 plt.show()
 fig.savefig('access_stl_norm.png')
 '''
-get_points("test_file.txt")
