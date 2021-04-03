@@ -1,5 +1,4 @@
 from solar_objects import *
-from tkinter import messagebox
 
 STATS = open("stats.txt", 'w')
 
@@ -71,11 +70,8 @@ def write_space_objects_data_to_file(output_filename, space_objects):
         for obj in space_objects:
             out_file.write(str(obj.type) + ' ' + str(obj.R) + ' ' + str(obj.color) + ' ' + str(obj.m) + ' ' + str(obj.x)
                            + ' ' + str(obj.y) + ' ' + str(obj.Vx) + ' ' + str(obj.Vy) + '\n')
-        out_file.close()
-
-
+            
 def stats(space_objects, time):
-
     for obj in space_objects:
         STATS.write(str(obj.x) + ' ' + str(obj.Vx) + ' ' + str(obj.y) + ' ' + str(obj.Vy) + ' ' + str(time) + '\n')
 
