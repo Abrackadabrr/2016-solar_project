@@ -69,7 +69,7 @@ def write_space_objects_data_to_file(output_filename, space_objects):
         for obj in space_objects:
             new = str(obj.type) + ' ' + str(obj.R) + ' ' + str(obj.color) + ' ' + str(obj.m) + ' ' + str(obj.x) + ' ' + str(obj.y) + ' ' + str(obj.Vx) + ' ' + str(obj.Vy)
             out_file.write(new)
-            out_file.close()
+        out_file.close()
 
 
 
@@ -77,10 +77,10 @@ def write_space_objects_data_to_file(output_filename, space_objects):
 def stats(body, output_filename, space_objects):
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            new = str(body.x) + ' ' + str(body.Vx) + ' ' + str(body.y) + ' ' + str(body.Vy)
-            out_file.write(new)
-            out_file.close()
-        print(new)
+            new_1 = str(body.x) + ' ' + str(body.Vx) + ' ' + str(body.y) + ' ' + str(body.Vy)
+            out_file.write(new_1)
+        out_file.close()
+
 
 
 if __name__ == "__main__":
