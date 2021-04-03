@@ -1,5 +1,4 @@
-# coding: utf-8
-# license: GPLv3
+
 
 import tkinter
 from tkinter.filedialog import *
