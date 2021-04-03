@@ -1,7 +1,6 @@
-# coding: utf-8
-# license: GPLv3
-
 from solar_objects import *
+
+STATS = open("stats.txt", 'w')
 
 
 def read_space_objects_data_from_file(input_filename):
@@ -53,7 +52,6 @@ def parse_parameters(line, object):
     object.y = float(line[5])
     object.Vx = float(line[6])
     object.Vy = float(line[7])
-    print(object.Vy)
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
@@ -67,10 +65,15 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     **output_filename** — имя входного файла
     **space_objects** — список объектов планет и звёзд
     """
+
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
             out_file.write(str(obj.type) + ' ' + str(obj.R) + ' ' + str(obj.color) + ' ' + str(obj.m) + ' ' + str(obj.x)
                            + ' ' + str(obj.y) + ' ' + str(obj.Vx) + ' ' + str(obj.Vy) + '\n')
+            
+def stats(space_objects, time):
+    for obj in space_objects:
+        STATS.write(str(obj.x) + ' ' + str(obj.Vx) + ' ' + str(obj.y) + ' ' + str(obj.Vy) + ' ' + str(time) + '\n')
 
 
 if __name__ == "__main__":
