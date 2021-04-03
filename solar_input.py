@@ -54,7 +54,7 @@ def parse_parameters(line, object):
     object.y = float(line[5])
     object.Vx = float(line[6])
     object.Vy = float(line[7])
-    print(object.Vy)
+
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
@@ -68,18 +68,19 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     **output_filename** — имя входного файла
     **space_objects** — список объектов планет и звёзд
     """
+    space_objects = [object.type, object.R, object.color, object.m, object.x, object.y, object.Vx, object.Vy]
+
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            print(out_file, "%s %d %s %f" % ('1', 2, '3', 4.5))
-            # FIXME: should store real values
+            out_file.write(space_objects)
+        out_file.close()
+        print(space_objects)
 
+    # FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
 
-# FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
-
-def stats(body):
     data_f = [body.x, body.y, body.Vx, body.Vy]
     with open("stats.txt.", "w") as f:
-            f.write(data_f)
+        f.write(data_f)
     f.close()
     print(data_f)
 

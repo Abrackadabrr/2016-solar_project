@@ -96,6 +96,7 @@ def save_file_dialog():
     write_space_objects_data_to_file(out_filename, space_objects)
 
 
+
 def main():
     """Главная функция главного модуля.
     Создаёт объекты графического дизайна библиотеки tkinter: окно, холст, фрейм с кнопками, кнопки.
@@ -139,7 +140,7 @@ def main():
     displayed_time.set(str(physical_time) + " seconds gone")
     time_label = tkinter.Label(frame, textvariable=displayed_time, width=30)
     time_label.pack(side=tkinter.RIGHT)
-    
+
 
     root.mainloop()
     print('Modelling finished!')
