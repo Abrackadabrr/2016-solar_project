@@ -1,5 +1,3 @@
-
-
 import tkinter
 from tkinter.filedialog import *
 from solar_vis import *
@@ -38,7 +36,7 @@ def execution():
         update_object_position(space, body)
     physical_time += time_step.get()
     displayed_time.set("%.1f" % physical_time + " seconds gone")
-
+    stats(space_objects, physical_time)
     if perform_execution:
         space.after(101 - int(time_speed.get()), execution)
 
@@ -140,9 +138,10 @@ def main():
     time_label = tkinter.Label(frame, textvariable=displayed_time, width=30)
     time_label.pack(side=tkinter.RIGHT)
 
-
     root.mainloop()
     print('Modelling finished!')
+    STATS.close()
+
 
 if __name__ == "__main__":
     main()
