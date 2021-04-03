@@ -65,13 +65,13 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     **space_objects** — список объектов планет и звёзд
     """
 
-    obj = []
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            space_objects = SpaceObject()
-        out_file.write(space_objects)
-        out_file.close()
-        print(space_objects)
+            new = str(obj.type) + ' ' + str(obj.R) + ' ' + str(obj.color) + ' ' + str(obj.m) + ' ' + str(obj.x) + ' ' + str(obj.y) + ' ' + str(obj.Vx) + ' ' + str(obj.Vy)
+            out_file.write(new)
+            out_file.close()
+        print(new)
+
 
 # FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
 
