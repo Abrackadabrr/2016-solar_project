@@ -76,7 +76,7 @@ def write_space_objects_data_to_file(output_filename, space_objects):
 def stats(body, output_filename, space_objects):
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            new_1 = str(body.x) + ' ' + str(body.Vx) + ' ' + str(body.y) + ' ' + str(body.Vy)
+            new_1 = str(body.x) + ' ' + str(body.Vx) + ' ' + str(body.y) + ' ' + str(body.Vy) + '\n'
             out_file.write(new_1)
         out_file.close()
 
