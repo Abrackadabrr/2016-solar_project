@@ -1,5 +1,3 @@
-
-
 from solar_objects import *
 from tkinter import messagebox
 
@@ -55,7 +53,6 @@ def parse_parameters(line, object):
     object.Vy = float(line[7])
 
 
-
 def write_space_objects_data_to_file(output_filename, space_objects):
     """Сохраняет данные о космических объектах в файл.
     Строки должны иметь следующий формат:
@@ -67,18 +64,16 @@ def write_space_objects_data_to_file(output_filename, space_objects):
     **output_filename** — имя входного файла
     **space_objects** — список объектов планет и звёзд
     """
-    space_objects = [object.type, object.R, object.color, object.m, object.x, object.y, object.Vx, object.Vy]
 
+    obj = []
     with open(output_filename, 'w') as out_file:
         for obj in space_objects:
-            out_file.write(space_objects)
+            space_objects = SpaceObject()
+        out_file.write(space_objects)
         out_file.close()
         print(space_objects)
 
 # FIXME: хорошо бы ещё сделать функцию, сохранающую статистику в заданный файл...
 
-
-
-
-
-
+if __name__ == "__main__":
+    print("This module is not for direct call!")
