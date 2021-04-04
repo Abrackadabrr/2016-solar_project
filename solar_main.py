@@ -3,6 +3,7 @@ from tkinter.filedialog import *
 from solar_vis import *
 from solar_model import *
 from solar_input import *
+from plots import *
 
 perform_execution = False
 """Флаг цикличности выполнения расчёта"""
@@ -36,7 +37,8 @@ def execution():
         update_object_position(space, body)
     physical_time += time_step.get()
     displayed_time.set("%.1f" % physical_time + " seconds gone")
-    stats(space_objects, physical_time)
+    if len(space_objects) == 2:
+        stats(space_objects, physical_time)
     if perform_execution:
         space.after(101 - int(time_speed.get()), execution)
 
@@ -93,7 +95,6 @@ def save_file_dialog():
     write_space_objects_data_to_file(out_filename, space_objects)
 
 
-
 def main():
     """Главная функция главного модуля.
     Создаёт объекты графического дизайна библиотеки tkinter: окно, холст, фрейм с кнопками, кнопки.
@@ -141,7 +142,9 @@ def main():
     root.mainloop()
     print('Modelling finished!')
     STATS.close()
-
+    if len(space_objects) == 2:
+        if space_objects[1].type != "Star":
+            plot()
 
 
 if __name__ == "__main__":

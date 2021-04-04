@@ -1,5 +1,5 @@
 from solar_objects import *
-
+import math
 STATS = open("stats.txt", 'w')
 
 
@@ -70,11 +70,19 @@ def write_space_objects_data_to_file(output_filename, space_objects):
         for obj in space_objects:
             out_file.write(str(obj.type) + ' ' + str(obj.R) + ' ' + str(obj.color) + ' ' + str(obj.m) + ' ' + str(obj.x)
                            + ' ' + str(obj.y) + ' ' + str(obj.Vx) + ' ' + str(obj.Vy) + '\n')
+    out_file.close()
 
 
 def stats(space_objects, time):
+    star_x = 0
+    star_y = 0
     for obj in space_objects:
-        STATS.write(str(obj.x) + ' ' + str(obj.Vx) + ' ' + str(obj.y) + ' ' + str(obj.Vy) + ' ' + str(time) + '\n')
+        if obj.type == "Star":
+            star_y = obj.y
+            star_x = obj.x
+        else:
+            STATS.write(str(math.sqrt((obj.x - star_x)**2 + (obj.y - star_y)**2)) + ' '
+                        + str(math.sqrt(obj.Vx**2 + obj.Vy**2)) + ' ' + str(time) + '\n')
 
 
 if __name__ == "__main__":
