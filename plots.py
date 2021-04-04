@@ -1,18 +1,15 @@
 import matplotlib.pyplot as plt
-import math
-import matplotlib.patches as mpatches
 
 
 def get_params(filename):
     """
     Считываю данные из файлика в массив и возвращю его
     :param filename: имя файла в этой же директории
-    return: два листа - один с расстоянием, другой со скоростью
+    return: лист времени и кортеж (лист[расстояние], лист[скорость])
     """
     list_of_velocity = []
     list_of_distance = []
     list_of_time = []
-    list_of_strings = []
     list_of_data = []
 
     with open(filename, 'r') as in_file:
@@ -30,20 +27,28 @@ def get_params(filename):
     return list_of_time, (list_of_distance, list_of_velocity)
 
 
-def build_plot(name_of_subplot, tup_data, color, name):
+def build_plot(name_of_subplot, tup_data, color):
+    """
+    Строит график на соответвующем поле
+    **name_of_subplot** - имя поля
+    **tup_dta** - кортеж из (х, у)
+    **color** - цвет линии
+    """
     name_of_subplot.plot(tup_data[0], tup_data[1], '-', label='stl', color=color)
-    return mpatches.Patch(color=color, label=name)
 
 
 def plot(together=False):
+    """
+    Строит графики по данным в файле "stats.txt"
+    """
     time, planet_params = get_params("stats.txt")
 
     if together:
         fig, sub = plt.subplots(1, 3, figsize=(18, 6))
 
-        planet_vel = build_plot(sub[0], (time, planet_params[1]), 'red', 'Velocity')
-        planet_dist = build_plot(sub[1], (time, planet_params[0]), 'blue', 'Distance')
-        planet_vel_of_dist = build_plot(sub[2], (planet_params[0], planet_params[1]), 'green', 'Velocity of distance')
+        build_plot(sub[0], (time, planet_params[1]), 'red')
+        build_plot(sub[1], (time, planet_params[0]), 'blue')
+        build_plot(sub[2], (planet_params[0], planet_params[1]), 'green')
 
         plt.grid()
         sub[0].set_xlabel('Time, s')
@@ -58,7 +63,7 @@ def plot(together=False):
         fig.savefig('Planet param.png')
     else:
         fig, vel = plt.subplots()
-        planet_vel = build_plot(vel, (time, planet_params[1]), 'red', 'Velocity')
+        build_plot(vel, (time, planet_params[1]), 'red')
 
         vel.set_xlabel('Time, years')
         vel.set_ylabel('Velocity, km/s')
@@ -67,7 +72,7 @@ def plot(together=False):
         fig.savefig('vel.png')
 
         fig, dist = plt.subplots()
-        planet_dist = build_plot(dist, (time, planet_params[0]), 'blue', 'Distance')
+        build_plot(dist, (time, planet_params[0]), 'blue')
 
         dist.set_xlabel('Time, years')
         dist.set_ylabel('Distance, au')
@@ -76,7 +81,7 @@ def plot(together=False):
         fig.savefig('dist.png')
 
         fig, v_d = plt.subplots()
-        planet_vel_of_dist = build_plot(v_d, (planet_params[0], planet_params[1]), 'green', 'Velocity of distance')
+        build_plot(v_d, (planet_params[0], planet_params[1]), 'green')
 
         v_d.set_xlabel('Distance, au')
         v_d.set_ylabel('Velocity, km/s')
@@ -85,7 +90,3 @@ def plot(together=False):
 
         plt.grid()
         plt.show()
-
-
-if __name__ == '__main__':
-    plot()

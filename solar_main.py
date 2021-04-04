@@ -12,16 +12,19 @@ physical_time = 0
 """Физическое время от начала расчёта.
 Тип: float"""
 
-displayed_time = None
+displayed_time = tkinter.StringVar()
 """Отображаемое на экране время.
 Тип: переменная tkinter"""
 
-time_step = None
+time_step = tkinter.DoubleVar()
 """Шаг по времени при моделировании.
 Тип: float"""
 
 space_objects = []
 """Список космических объектов."""
+
+time_speed = tkinter.DoubleVar()
+"""Скорость изменения времени. Отвечает за позлунок в окошке"""
 
 
 def execution():

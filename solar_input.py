@@ -28,7 +28,7 @@ def read_space_objects_data_from_file(input_filename):
     return objects
 
 
-def parse_parameters(line, object):
+def parse_parameters(line, obj):
     """Считывает данные о звезде из строки.
     Входная строка должна иметь слеюущий формат:
     Star <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
@@ -40,18 +40,18 @@ def parse_parameters(line, object):
     Параметры:
 
     **line** — строка с описание звезды.
-    **star** — объект звезды.
+    **obj** — небесный объект.
     """
     line = line.replace('\n', '')
     line = line.split(' ')
-    object.type = line[0]
-    object.R = int(line[1])
-    object.color = line[2]
-    object.m = float(line[3])
-    object.x = float(line[4])
-    object.y = float(line[5])
-    object.Vx = float(line[6])
-    object.Vy = float(line[7])
+    obj.type = line[0]
+    obj.R = int(line[1])
+    obj.color = line[2]
+    obj.m = float(line[3])
+    obj.x = float(line[4])
+    obj.y = float(line[5])
+    obj.Vx = float(line[6])
+    obj.Vy = float(line[7])
 
 
 def write_space_objects_data_to_file(output_filename, space_objects):
@@ -74,6 +74,12 @@ def write_space_objects_data_to_file(output_filename, space_objects):
 
 
 def stats(space_objects, time):
+    """
+    Сохранение статистики в файл object
+    Функция записывает на каждой итерации расчёта данные
+    **space_objects** — список объектов планет и звёзд
+    **time** - текущее время расчёта
+    """
     star_x = 0
     star_y = 0
     for obj in space_objects:
