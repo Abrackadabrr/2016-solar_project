@@ -1,9 +1,11 @@
 import tkinter
-from tkinter.filedialog import *
+import tkinter.filedialog as fld
 from solar_vis import *
 from solar_model import *
 from solar_input import *
 from plots import *
+
+ROOT = tkinter.Tk()
 
 perform_execution = False
 """Флаг цикличности выполнения расчёта"""
@@ -80,7 +82,7 @@ def open_file_dialog():
     perform_execution = False
     for obj in space_objects:
         space.delete(obj.image)  # удаление старых изображений планет
-    in_filename = askopenfilename(filetypes=(("Text file", ".txt"),))
+    in_filename = fld.askopenfilename(filetypes=(("Text file", ".txt"),))
     space_objects = read_space_objects_data_from_file(in_filename)
     max_distance = max([max(abs(obj.x), abs(obj.y)) for obj in space_objects])
     calculate_scale_factor(max_distance)
@@ -94,7 +96,7 @@ def save_file_dialog():
     функцию считывания параметров системы небесных тел из данного файла.
     Считанные объекты сохраняются в глобальный список space_objects
     """
-    out_filename = asksaveasfilename(filetypes=(("Text file", ".txt"),))
+    out_filename = fld.asksaveasfilename(filetypes=(("Text file", ".txt"),))
     write_space_objects_data_to_file(out_filename, space_objects)
 
 
@@ -112,12 +114,11 @@ def main():
     print('Modelling started!')
     physical_time = 0
 
-    root = tkinter.Tk()
     # космическое пространство отображается на холсте типа Canvas
-    space = tkinter.Canvas(root, width=window_width, height=window_height, bg="black")
+    space = tkinter.Canvas(ROOT, width=window_width, height=window_height, bg="black")
     space.pack(side=tkinter.TOP)
     # нижняя панель с кнопками
-    frame = tkinter.Frame(root)
+    frame = tkinter.Frame(ROOT)
     frame.pack(side=tkinter.BOTTOM)
 
     start_button = tkinter.Button(frame, text="Start", command=start_execution, width=6)
@@ -142,7 +143,7 @@ def main():
     time_label = tkinter.Label(frame, textvariable=displayed_time, width=30)
     time_label.pack(side=tkinter.RIGHT)
 
-    root.mainloop()
+    ROOT.mainloop()
     print('Modelling finished!')
     STATS.close()
     if len(space_objects) == 2:
